@@ -188,13 +188,13 @@ function Cart() {
 function CartList() {
     return () => div({ class: "cart-list" },
         [...cartData.items.val]
-            .map(([name]) => CartListItem(name))
+            .map(([name]) => CartItem(name))
     )
 }
 /**
  * @param {string} name 
  */
-function CartListItem(name) {
+function CartItem(name) {
     const product = productListData.products.val.get(name);
     const count = cartData.items.val.get(name);
     const subTotal = cartData.subTotals.val.get(name);
