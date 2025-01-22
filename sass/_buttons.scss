@@ -1,0 +1,23 @@
+@use "colors";
+
+.cart-btn{
+    color: black;
+    background-color: white;
+    border: 1px solid colors.$rose-400;
+    padding-block: 12.5px;
+    padding-inline: 28px;
+    border-radius: 999px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &::before{
+        content: ' ';
+        width: 20px;
+        height: 20px;
+        background-image: url("/assets/images/icon-add-to-cart.svg");
+        background-size: contain;
+        display: inline-block;
+        margin-right: 8px;
+    }
+}

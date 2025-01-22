@@ -64,7 +64,7 @@ class CartData {
 const productListData = new ProductListData();
 productListData.load();
 const cartData = new CartData();
-const { div, picture, source, img, button, input } = van.tags;
+const { div, picture, source, img, button, b } = van.tags;
 
 // @ts-ignore
 van.add(document.querySelector("#product-list"), ProductList())
@@ -122,10 +122,11 @@ function ProductCardButton(name) {
             )
         } else {
             return button({
+                class : "cart-btn",
                 onclick: () => {
                     cartData.addItem(name)
                 }
-            }, "Add to Cart")
+            }, b("Add to Cart"))
         }
     }
 }
