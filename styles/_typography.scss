@@ -1,0 +1,65 @@
+$RedHatText: 'Red Hat Text';
+
+@font-face {
+    font-family: $RedHatText;
+    src: url('/assets/fonts/RedHatText-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: $RedHatText;
+    src: url('/assets/fonts/RedHatText-Italic-VariableFont_wght.ttf')  format('truetype');
+    font-style: italic;
+}
+
+
+@mixin preset-1{
+    font-family: $RedHatText;
+    font-weight: bold;
+    font-size: 2.5rem;
+    line-height: 120%;
+    letter-spacing: 0;
+}
+
+@mixin preset-2{
+    font-family: $RedHatText;
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 125%;
+    letter-spacing: 0;
+}
+
+@mixin preset-3{
+    font-family: $RedHatText;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 125%;
+    letter-spacing: 0;
+}
+
+@mixin preset-4{
+    font-family: $RedHatText;
+    font-weight: normal;
+    font-size: 0.875rem;
+    line-height: 125%;
+    letter-spacing: 0;
+
+    & b, & strong{
+        font-weight: 600;
+    }
+}
+
+.txt-1{
+    @include preset-1;
+}
+
+.txt-2{
+    @include preset-2;
+}
+
+.txt-3{
+    @include preset-3;
+}
+
+body, p, .txt-4 {
+    @include preset-4;
+}
