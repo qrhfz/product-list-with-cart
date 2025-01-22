@@ -54,12 +54,21 @@ class CartData {
             }
             return subTotals;
         })
+        /** @type {Van.State<number>} */
         this.total = van.derive(() => {
             let total = 0;
             for (const [_, price] of this.subTotals.val) {
                 total += price;
             }
             return total;
+        })
+        /** @type {Van.State<number>} */
+        this.itemsCount = van.derive(()=>{
+            let itemsCount = 0;
+            for (const [_, count] of this.items.val) {
+                itemsCount+=count;
+            }
+            return itemsCount;
         })
     }
 
@@ -166,7 +175,7 @@ van.add(document.querySelector("#cart"), Cart());
 function Cart() {
     return ()=>cartData.items.val.size?div(
         div({ class: "txt-1 txt-red" },
-            `Your Cart (${cartData.items.val.size})`
+            `Your Cart (${cartData.itemsCount.val})`
         ),
         CartList(),
         div(
