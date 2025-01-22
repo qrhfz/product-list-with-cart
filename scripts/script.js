@@ -206,9 +206,10 @@ function CartListItem(name) {
     }
 
     return div(
-        div(product.name),
-        div(`${count}x`),
-        div(`@ ${product.price}`),
-        div(`@ ${subTotal}`),
+        div(b(product.name)),
+        div({class:"txt-red"},b(`${count}x`)),
+        div({class:"txt-rose-500"},`@ ${product.price}`),
+        div({class:"txt-rose-500"},b(`@ ${subTotal}`)),
+        button("remove")
     );
 }
