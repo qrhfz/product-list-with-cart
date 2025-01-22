@@ -1,0 +1,17 @@
+#product-list{
+    padding: 24px;
+}
+
+.product-card{
+    picture {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .add-to-cart-btn-wrapper{
+        height: 38px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        transform: translate(0,-50%);
+    }
+}

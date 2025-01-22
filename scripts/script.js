@@ -87,16 +87,19 @@ function ProductList() {
  * @param {Product} product 
  */
 function ProductCard(product) {
-    return div(
+    return div({class:"product-card"},
         picture(
             source({ media: "(min-width: 800px)", srcset: product.image.desktop }),
             source({ media: "(min-width: 480px)", srcset: product.image.tablet }),
             img({ src: product.image.mobile, alt: product.name }),
         ),
-        ProductCardButton(product.name),
+        div(
+            {class:"add-to-cart-btn-wrapper"},
+            ProductCardButton(product.name),
+        ),
         div(product.category),
-        div(product.name),
-        div(`$${product.price}`),
+        div({class:"txt-3"}, product.name),
+        div({class:"txt-3"},`$${product.price}`),
     )
 }
 
