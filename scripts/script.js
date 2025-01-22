@@ -97,7 +97,7 @@ function ProductCard(product) {
             {class:"add-to-cart-btn-wrapper"},
             ProductCardButton(product.name),
         ),
-        div(product.category),
+        div({class:"txt-rose-500"}, product.category),
         div({class:"txt-3"}, product.name),
         div({class:"txt-3 txt-red"},`$${product.price}`),
     )
