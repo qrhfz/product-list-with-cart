@@ -8,3 +8,14 @@ $rose-100: hsl(13,31%,94%);
 $rose-50: hsl(20,50%,98%);
 
 $green: hsl(159,68%,38%);
+
+$map: (
+    "red": $red,
+    "rose-900": $rose-900,
+    "rose-500": $rose-500,
+    "rose-400": $rose-400,
+    "rose-300": $rose-300,
+    "rose-100": $rose-100,
+    "rose-50": $rose-50,
+    "green": $green,
+);

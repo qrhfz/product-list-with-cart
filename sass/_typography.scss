@@ -1,3 +1,5 @@
+@use "colors";
+
 $RedHatText: 'Red Hat Text';
 
 @font-face {
@@ -62,4 +64,10 @@ $RedHatText: 'Red Hat Text';
 
 body, p, .txt-4 {
     @include preset-4;
+}
+
+@each $name, $color in colors.$map{
+    .txt-#{$name}{
+        color: $color;
+    }
 }

@@ -99,7 +99,7 @@ function ProductCard(product) {
         ),
         div(product.category),
         div({class:"txt-3"}, product.name),
-        div({class:"txt-3"},`$${product.price}`),
+        div({class:"txt-3 txt-red"},`$${product.price}`),
     )
 }
 
