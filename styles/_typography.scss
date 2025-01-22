@@ -48,7 +48,7 @@ $RedHatText: 'Red Hat Text';
     }
 }
 
-.txt-1{
+.txt-1, h1{
     @include preset-1;
 }
 
