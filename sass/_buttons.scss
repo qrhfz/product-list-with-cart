@@ -20,6 +20,12 @@
         display: inline-block;
         margin-right: 8px;
     }
+
+    &:hover{
+        cursor: pointer;
+        color: colors.$red;
+        border-color: colors.$red;
+    }
 }
 
 
