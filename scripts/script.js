@@ -192,9 +192,9 @@ function Cart() {
             ),
             CartList(),
             hr(),
-            div(
+            div({class:"order-total"},
                 div("Order Total"),
-                div(`$${cartData.total.val}`)
+                div({class: "txt-2"},`$${cartData.total.val}`)
             )
         )
         : div("Your added items will appear here");
