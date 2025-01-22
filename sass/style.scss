@@ -3,3 +3,7 @@
 @use "typography";
 @use "buttons";
 @use "components";
+
+body, html {
+    background-color: colors.$rose-50;
+}
