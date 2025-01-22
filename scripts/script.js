@@ -63,10 +63,10 @@ class CartData {
             return total;
         })
         /** @type {Van.State<number>} */
-        this.itemsCount = van.derive(()=>{
+        this.itemsCount = van.derive(() => {
             let itemsCount = 0;
             for (const [_, count] of this.items.val) {
-                itemsCount+=count;
+                itemsCount += count;
             }
             return itemsCount;
         })
@@ -97,7 +97,7 @@ class CartData {
 const productListData = new ProductListData();
 productListData.load();
 const cartData = new CartData();
-const { div, picture, source, img, button, b } = van.tags;
+const { div, picture, source, img, button, b, hr } = van.tags;
 
 // @ts-ignore
 van.add(document.querySelector("#product-list"), ProductList())
@@ -173,16 +173,18 @@ function ProductCardButton(name) {
 van.add(document.querySelector("#cart"), Cart());
 
 function Cart() {
-    return ()=>cartData.items.val.size?div(
-        div({ class: "txt-2 txt-red" },
-            `Your Cart (${cartData.itemsCount.val})`
-        ),
-        CartList(),
-        div(
-            div("Order Total"),
-            div(`$${cartData.total.val}`)
+    return () => cartData.items.val.size
+        ? div({class: "cart-container"},
+            div({ class: "txt-2 txt-red" },
+                `Your Cart (${cartData.itemsCount.val})`
+            ),
+            CartList(),
+            div(
+                div("Order Total"),
+                div(`$${cartData.total.val}`)
+            )
         )
-    ):div("Your added items will appear here");
+        : div("Your added items will appear here");
 }
 
 function CartList() {
@@ -205,11 +207,18 @@ function CartItem(name) {
         return div("error");
     }
 
-    return div({class: "cart-item"},
-        div(b(product.name)),
-        div({class:"txt-red"},b(`${count}x`)),
-        div({class:"txt-rose-500"},`@ ${product.price}`),
-        div({class:"txt-rose-500"},b(`@ ${subTotal}`)),
-        button("remove")
+    return div({ class: "cart-item" },
+        div({class:"cart-item-name"},b(product.name)),
+        div(
+            {class:"cart-item-detail"},
+            div({ class: "txt-red" }, b(`${count}x`)),
+            div({ class: "txt-rose-500" }, `@ ${product.price}`),
+            div({ class: "txt-rose-500" }, b(`$${subTotal}`)),
+        ),
+        div(
+            {class:"cart-item-action"},
+            button({class:"cart-item-rm-btn"},"remove")
+        ),
+        hr()
     );
 }
