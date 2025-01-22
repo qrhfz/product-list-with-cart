@@ -1,7 +1,6 @@
 @use "colors";
 
 hr{
-    margin-block:16px;
     height: 1px;
     border: 0 none;
     background-color: colors.$rose-100;
@@ -82,10 +81,12 @@ hr{
 
                 hr{
                     grid-area: sep;
+                    margin-block:16px;
                 }
 
                 &:last-child hr{
                     display: none;
+                    margin-block: none;
                 }
             }
         }
