@@ -1,5 +1,13 @@
 @use "colors";
 
+hr{
+    margin-block:16px;
+    height: 1px;
+    border: 0 none;
+    background-color: colors.$rose-100;
+    color: colors.$rose-100;
+}
+
 #product-list {
     padding: 24px;
 
@@ -36,6 +44,7 @@
         .cart-list {
             .cart-item {
                 display: grid;
+                gap: 8px;
                 grid-template:
                     "name   action" auto
                     "detail action" auto
@@ -53,15 +62,30 @@
 
                 .cart-item-action {
                     grid-area: action;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    
+                    button.cart-item-rm-btn{
+                        width: 20px;
+                        height: 20px;
+                        background-color: transparent;
+                        background-image: url("/assets/images/icon-remove-item.svg");
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: 12.5px 12.5px;
+                        border: 1px solid colors.$rose-300;
+                        border-radius: 9999px;
+                        font-size: 0;
+                    }
                 }
 
                 hr{
                     grid-area: sep;
-                    margin-block:16px;
-                    height: 1px;
-                    border: 0 none;
-                    background-color: colors.$rose-100;
-                    color: colors.$rose-100;
+                }
+
+                &:last-child hr{
+                    display: none;
                 }
             }
         }

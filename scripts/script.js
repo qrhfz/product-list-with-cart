@@ -39,6 +39,7 @@ class ProductListData {
 
 
 class CartData {
+
     constructor() {
         /** @type {Van.State<Map<string, number>>} */
         this.items = van.state(new Map());
@@ -70,6 +71,8 @@ class CartData {
             }
             return itemsCount;
         })
+
+
     }
 
     /**
@@ -92,6 +95,15 @@ class CartData {
      */
     reduceItem(name) {
         this.addItem(name, -1);
+    }
+
+    /**
+     * @param {string} name 
+     */    
+    removeItem(name) {
+        const newItems = new Map(this.items.val);
+        newItems.delete(name);
+        this.items.val = newItems;
     }
 }
 const productListData = new ProductListData();
@@ -179,6 +191,7 @@ function Cart() {
                 `Your Cart (${cartData.itemsCount.val})`
             ),
             CartList(),
+            hr(),
             div(
                 div("Order Total"),
                 div(`$${cartData.total.val}`)
@@ -217,7 +230,15 @@ function CartItem(name) {
         ),
         div(
             {class:"cart-item-action"},
-            button({class:"cart-item-rm-btn"},"remove")
+            button({
+                    class:"cart-item-rm-btn",
+                    onclick: ()=>{
+                        console.log("remove", name)
+                        cartData.removeItem(name);
+                    }
+                }
+                ,"remove"
+            )
         ),
         hr()
     );
