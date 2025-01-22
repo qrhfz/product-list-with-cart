@@ -174,7 +174,7 @@ van.add(document.querySelector("#cart"), Cart());
 
 function Cart() {
     return ()=>cartData.items.val.size?div(
-        div({ class: "txt-1 txt-red" },
+        div({ class: "txt-2 txt-red" },
             `Your Cart (${cartData.itemsCount.val})`
         ),
         CartList(),
@@ -205,7 +205,7 @@ function CartItem(name) {
         return div("error");
     }
 
-    return div(
+    return div({class: "cart-item"},
         div(b(product.name)),
         div({class:"txt-red"},b(`${count}x`)),
         div({class:"txt-rose-500"},`@ ${product.price}`),
