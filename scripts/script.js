@@ -107,14 +107,16 @@ function ProductCard(product) {
 function ProductCardButton(name) {
     return () => {
         if (cartData.items.val.get(name)) {
-            return div(
+            return div({class:"active-add-to-cart-btn-group"},
                 button({
+                    class:"minus-btn",
                     onclick: () => {
                         cartData.reduceItem(name);
                     }
                 }, "-"),
-                div(cartData.items.val.get(name)),
+                div(b(cartData.items.val.get(name))),
                 button({
+                    class:"plus-btn",
                     onclick: () => {
                         cartData.addItem(name);
                     }
@@ -122,7 +124,7 @@ function ProductCardButton(name) {
             )
         } else {
             return button({
-                class : "cart-btn",
+                class : "add-to-cart-btn",
                 onclick: () => {
                     cartData.addItem(name)
                 }

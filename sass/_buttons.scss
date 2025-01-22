@@ -1,6 +1,6 @@
 @use "colors";
 
-.cart-btn{
+.add-to-cart-btn{
     color: black;
     background-color: white;
     border: 1px solid colors.$rose-400;
@@ -19,5 +19,37 @@
         background-size: contain;
         display: inline-block;
         margin-right: 8px;
+    }
+}
+
+
+.active-add-to-cart-btn-group{
+    display: flex;
+    max-width: fit-content;
+    background-color: colors.$red;
+    padding: 12px;
+    gap: 45.5px;
+    border-radius: 999px;
+    color: white;
+    
+    button{
+        background: none;
+        border: 2px solid white;
+        border-radius: 999px;
+        color: transparent;
+        user-select: none;
+        width: 20px;
+        height: 20px;
+        background-size: 10px;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        &.minus-btn{
+            background-image: url("/assets/images/icon-decrement-quantity.svg");
+        }
+
+        &.plus-btn{
+            background-image: url("/assets/images/icon-increment-quantity.svg");
+        }
     }
 }
