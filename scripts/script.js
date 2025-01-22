@@ -42,6 +42,25 @@ class CartData {
     constructor() {
         /** @type {Van.State<Map<string, number>>} */
         this.items = van.state(new Map());
+        /** @type {Van.State<Map<string, number>>} */
+        this.subTotals = van.derive(() => {
+            const subTotals = new Map();
+            for (const [name, count] of this.items.val) {
+                const price = productListData.products.val.get(name)?.price;
+                if (price === undefined) {
+                    continue
+                }
+                subTotals.set(name, price * count);
+            }
+            return subTotals;
+        })
+        this.total = van.derive(() => {
+            let total = 0;
+            for (const [_, price] of this.subTotals.val) {
+                total += price;
+            }
+            return total;
+        })
     }
 
     /**
@@ -50,7 +69,12 @@ class CartData {
     addItem(name, modifier = 1) {
         const newItems = new Map(this.items.val);
         const oldItemCount = newItems.get(name);
-        newItems.set(name, oldItemCount ? oldItemCount + modifier : 1);
+        const newItemCount = oldItemCount ? oldItemCount + modifier : 1;
+        if (newItemCount === 0) {
+            newItems.delete(name);
+        } else {
+            newItems.set(name, newItemCount);
+        }
         this.items.val = newItems;
     }
 
@@ -87,19 +111,19 @@ function ProductList() {
  * @param {Product} product 
  */
 function ProductCard(product) {
-    return div({class:"product-card"},
+    return div({ class: "product-card" },
         picture(
             source({ media: "(min-width: 800px)", srcset: product.image.desktop }),
             source({ media: "(min-width: 480px)", srcset: product.image.tablet }),
             img({ src: product.image.mobile, alt: product.name }),
         ),
         div(
-            {class:"add-to-cart-btn-wrapper"},
+            { class: "add-to-cart-btn-wrapper" },
             ProductCardButton(product.name),
         ),
-        div({class:"txt-rose-500"}, product.category),
-        div({class:"txt-3"}, product.name),
-        div({class:"txt-3 txt-red"},`$${product.price}`),
+        div({ class: "txt-rose-500" }, product.category),
+        div({ class: "txt-3" }, product.name),
+        div({ class: "txt-3 txt-red" }, `$${product.price}`),
     )
 }
 
@@ -110,16 +134,16 @@ function ProductCard(product) {
 function ProductCardButton(name) {
     return () => {
         if (cartData.items.val.get(name)) {
-            return div({class:"active-add-to-cart-btn-group"},
+            return div({ class: "active-add-to-cart-btn-group" },
                 button({
-                    class:"minus-btn",
+                    class: "minus-btn",
                     onclick: () => {
                         cartData.reduceItem(name);
                     }
                 }, "-"),
                 div(b(cartData.items.val.get(name))),
                 button({
-                    class:"plus-btn",
+                    class: "plus-btn",
                     onclick: () => {
                         cartData.addItem(name);
                     }
@@ -127,11 +151,55 @@ function ProductCardButton(name) {
             )
         } else {
             return button({
-                class : "add-to-cart-btn",
+                class: "add-to-cart-btn",
                 onclick: () => {
                     cartData.addItem(name)
                 }
             }, b("Add to Cart"))
         }
     }
+}
+
+// @ts-ignore
+van.add(document.querySelector("#cart"), Cart());
+
+function Cart() {
+    return ()=>cartData.items.val.size?div(
+        div({ class: "txt-1 txt-red" },
+            `Your Cart (${cartData.items.val.size})`
+        ),
+        CartList(),
+        div(
+            div("Order Total"),
+            div(`$${cartData.total.val}`)
+        )
+    ):div("Your added items will appear here");
+}
+
+function CartList() {
+    return () => div({ class: "cart-list" },
+        [...cartData.items.val]
+            .map(([name]) => CartListItem(name))
+    )
+}
+/**
+ * @param {string} name 
+ */
+function CartListItem(name) {
+    const product = productListData.products.val.get(name);
+    const count = cartData.items.val.get(name);
+    const subTotal = cartData.subTotals.val.get(name);
+
+    if ((product === undefined) ||
+        (count === undefined) ||
+        (subTotal === undefined)) {
+        return div("error");
+    }
+
+    return div(
+        div(product.name),
+        div(`${count}x`),
+        div(`@ ${product.price}`),
+        div(`@ ${subTotal}`),
+    );
 }
