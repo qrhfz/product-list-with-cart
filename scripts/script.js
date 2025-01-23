@@ -200,7 +200,9 @@ function Cart() {
                     "This is a ", b("carbon-neutral"), " delivery"
                 )
             ),
-            button({ class: "btn" }, "Confirm Order"),
+            button({ class: "btn", onclick:()=>{
+                document.querySelector("dialog")?.showModal();
+            } }, "Confirm Order"),
         ]
     }
 
