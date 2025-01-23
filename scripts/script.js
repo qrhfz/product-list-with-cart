@@ -99,7 +99,7 @@ class CartData {
 
     /**
      * @param {string} name 
-     */    
+     */
     removeItem(name) {
         const newItems = new Map(this.items.val);
         newItems.delete(name);
@@ -185,19 +185,38 @@ function ProductCardButton(name) {
 van.add(document.querySelector("#cart"), Cart());
 
 function Cart() {
-    return () => cartData.items.val.size
-        ? div({class: "cart-container"},
+
+    function FilledCart() {
+        return [
+            CartList(),
+            hr(),
+            div({ class: "order-total" },
+                div("Order Total"),
+                div({ class: "txt-2" }, `$${cartData.total.val}`)
+            ),
+            div({ class: "carbon-neutral" }, 
+                "This is a ", b("carbon-neutral"), " delivery"),
+            button({ class: "btn" }, "Confirm Order"),
+        ]
+    }
+
+    function EmptyCart() {
+        return [
+            div("Your added items will appear here")
+        ]
+    }
+
+    return () => {
+        const filled = cartData.total.val !== 0;
+            
+
+        return div({ class: "cart-container" },
             div({ class: "txt-2 txt-red" },
                 `Your Cart (${cartData.itemsCount.val})`
             ),
-            CartList(),
-            hr(),
-            div({class:"order-total"},
-                div("Order Total"),
-                div({class: "txt-2"},`$${cartData.total.val}`)
-            )
-        )
-        : div("Your added items will appear here");
+            filled ? FilledCart(): EmptyCart()
+        );
+    };
 }
 
 function CartList() {
@@ -221,23 +240,23 @@ function CartItem(name) {
     }
 
     return div({ class: "cart-item" },
-        div({class:"cart-item-name"},b(product.name)),
+        div({ class: "cart-item-name" }, b(product.name)),
         div(
-            {class:"cart-item-detail"},
+            { class: "cart-item-detail" },
             div({ class: "txt-red" }, b(`${count}x`)),
             div({ class: "txt-rose-500" }, `@ ${product.price}`),
             div({ class: "txt-rose-500" }, b(`$${subTotal}`)),
         ),
         div(
-            {class:"cart-item-action"},
+            { class: "cart-item-action" },
             button({
-                    class:"cart-item-rm-btn",
-                    onclick: ()=>{
-                        console.log("remove", name)
-                        cartData.removeItem(name);
-                    }
+                class: "cart-item-rm-btn",
+                onclick: () => {
+                    console.log("remove", name)
+                    cartData.removeItem(name);
                 }
-                ,"remove"
+            }
+                , "remove"
             )
         ),
         hr()
