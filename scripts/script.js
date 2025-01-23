@@ -117,7 +117,7 @@ van.add(document.querySelector("#product-list"), ProductList())
 
 function ProductList() {
     return () => {
-        const productListContainer = div({class:"product-list-container"})
+        const productListContainer = div({ class: "product-list-container" })
 
         for (const [_, product] of productListData.products.val) {
             van.add(productListContainer, ProductCard(product))
@@ -204,20 +204,28 @@ function Cart() {
     }
 
     function EmptyCart() {
-        return [
-            div("Your added items will appear here")
-        ]
+        return div(
+            {class:"empty-cart-placeholder"},
+            img({
+                width: 128,
+                height: 128,
+                src: "/assets/images/illustration-empty-cart.svg",
+                alt: "Empty Cart Illustration"
+            }),
+            div({class:"txt-4"},b("Your added items will appear here"))
+        )
+        
     }
 
     return () => {
         const filled = cartData.total.val !== 0;
-            
+
 
         return div({ class: "cart-container" },
             div({ class: "txt-2 txt-red" },
                 `Your Cart (${cartData.itemsCount.val})`
             ),
-            filled ? FilledCart(): EmptyCart()
+            filled ? FilledCart() : EmptyCart()
         );
     };
 }
