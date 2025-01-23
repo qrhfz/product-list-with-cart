@@ -275,3 +275,9 @@ function CartItem(name) {
         hr()
     );
 }
+
+document.querySelector("button#reset-order-btn")?.addEventListener("click",()=>{
+    cartData.items.val = new Map();
+    // @ts-ignore
+    document.querySelector("dialog#order-confirmed")?.close();
+})
