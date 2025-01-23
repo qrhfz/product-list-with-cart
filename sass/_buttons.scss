@@ -1,6 +1,23 @@
 @use "colors";
+@use "typography";
 
-.add-to-cart-btn{
+.btn {
+    padding-inline: 24px;
+    padding-block: 16px;
+    background-color: colors.$red;
+    color: white;
+    border-radius: 9999px;
+    border: none;
+    @include typography.preset-3;
+
+    &:hover {
+        background-image: 
+            linear-gradient(to left, hsla(0, 0%, 0%, 25%), hsla(0, 0%, 0%, 25%)),
+            linear-gradient(to left, colors.$red, colors.$red);
+    }
+}
+
+.add-to-cart-btn {
     color: black;
     background-color: white;
     border: 1px solid colors.$rose-400;
@@ -11,7 +28,7 @@
     flex-direction: row;
     align-items: center;
 
-    &::before{
+    &::before {
         content: ' ';
         width: 20px;
         height: 20px;
@@ -21,7 +38,7 @@
         margin-right: 8px;
     }
 
-    &:hover{
+    &:hover {
         cursor: pointer;
         color: colors.$red;
         border-color: colors.$red;
@@ -29,7 +46,7 @@
 }
 
 
-.active-add-to-cart-btn-group{
+.active-add-to-cart-btn-group {
     display: flex;
     max-width: fit-content;
     background-color: colors.$red;
@@ -37,8 +54,8 @@
     gap: 45.5px;
     border-radius: 999px;
     color: white;
-    
-    button{
+
+    button {
         background: none;
         border: 2px solid white;
         border-radius: 999px;
@@ -50,12 +67,13 @@
         background-repeat: no-repeat;
         background-position: center;
 
-        &.minus-btn{
+        &.minus-btn {
             background-image: url("/assets/images/icon-decrement-quantity.svg");
         }
 
-        &.plus-btn{
+        &.plus-btn {
             background-image: url("/assets/images/icon-increment-quantity.svg");
         }
     }
 }
+
