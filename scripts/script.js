@@ -134,6 +134,7 @@ function ProductList() {
 function ProductCard(product) {
     return div({ class: "product-card" },
         picture(
+            {class:()=>cartData.items.val.get(product.name)?"active":null},
             source({ media: "(min-width: 800px)", srcset: product.image.desktop }),
             source({ media: "(min-width: 480px)", srcset: product.image.tablet }),
             img({ src: product.image.mobile, alt: product.name }),
@@ -219,7 +220,6 @@ function Cart() {
 
     return () => {
         const filled = cartData.total.val !== 0;
-
 
         return div({ class: "cart-container" },
             div({ class: "txt-2 txt-red" },

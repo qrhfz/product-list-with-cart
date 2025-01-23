@@ -39,6 +39,11 @@ main{
     picture {
         border-radius: 8px;
         overflow: hidden;
+        border: 2px solid transparent;
+
+        &.active{
+            border-color: colors.$red;
+        }
     }
 
     .add-to-cart-btn-wrapper {
