@@ -77,3 +77,20 @@
     }
 }
 
+.carbon-neutral{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    background-color: colors.$rose-50;
+    border-radius: 8px;
+    padding: 16px;
+
+    &::before{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        content: "";
+        background-size: cover;
+        background-image: url("/assets/images/icon-carbon-neutral.svg");
+    }
+}

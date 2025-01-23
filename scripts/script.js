@@ -194,8 +194,11 @@ function Cart() {
                 div("Order Total"),
                 div({ class: "txt-2" }, `$${cartData.total.val}`)
             ),
-            div({ class: "carbon-neutral" }, 
-                "This is a ", b("carbon-neutral"), " delivery"),
+            div({ class: "carbon-neutral" },
+                div(
+                    "This is a ", b("carbon-neutral"), " delivery"
+                )
+            ),
             button({ class: "btn" }, "Confirm Order"),
         ]
     }
