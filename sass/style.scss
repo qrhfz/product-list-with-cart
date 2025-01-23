@@ -7,3 +7,7 @@
 body, html {
     background-color: colors.$rose-50;
 }
+
+::backdrop{
+    background-color: rgba($color: #000000, $alpha: 0.5)
+}
