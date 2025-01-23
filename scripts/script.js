@@ -276,6 +276,25 @@ function CartItem(name) {
     );
 }
 
+function OrderDetail() {
+    return [
+        OrderList(),
+        div("Order Total", ()=>`$${cartData.total}`)
+    ]
+}
+
+function OrderList() {
+    const listContainer = div();
+    
+    for (const element of cartData.items.val) {
+        
+    }
+}
+
+function OrderItem() {
+    
+}
+
 document.querySelector("button#reset-order-btn")?.addEventListener("click",()=>{
     cartData.items.val = new Map();
     // @ts-ignore
