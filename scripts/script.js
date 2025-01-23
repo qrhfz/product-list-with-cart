@@ -117,7 +117,7 @@ van.add(document.querySelector("#product-list"), ProductList())
 
 function ProductList() {
     return () => {
-        const productListContainer = div()
+        const productListContainer = div({class:"product-list-container"})
 
         for (const [_, product] of productListData.products.val) {
             van.add(productListContainer, ProductCard(product))

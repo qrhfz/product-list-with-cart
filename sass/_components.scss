@@ -1,4 +1,5 @@
 @use "colors";
+@use "breakpoints";
 
 hr{
     height: 1px;
@@ -13,11 +14,17 @@ hr{
     h1 {
         padding-bottom: 32px;
     }
+
+    .product-list-container{
+        display: grid;
+        @include breakpoints.on-tablet{
+            grid-gap: 32px 24px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
 }
 
 .product-card {
-    padding-bottom: 24px;
-
     picture {
         border-radius: 8px;
         overflow: hidden;
