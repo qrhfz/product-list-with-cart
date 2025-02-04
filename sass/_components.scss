@@ -1,5 +1,6 @@
 @use "colors";
 @use "breakpoints";
+@use "typography";
 
 hr {
     height: 1px;
@@ -171,18 +172,27 @@ dialog#order-confirmed {
     display: grid;
     grid-template:
         "img name name subtotal" auto
-        "img amount price subtotal" auto / 1fr 1fr 1fr 1fr;
+        "img amount price subtotal" auto / auto 1fr 1fr auto;
 
     .order-item-image {
         grid-area: img;
+
+        img{
+            width: 48px;
+            height: 48px;
+        }
     }
 
     .order-item-name {
         grid-area: name;
+
+        @include typography.preset-4
     }
 
     .order-item-amount {
         grid-area: amount;
+        @include typography.preset-4
+
     }
 
     .order-item-price {
@@ -191,5 +201,7 @@ dialog#order-confirmed {
 
     .order-item-subtotal{
         grid-area: subtotal;
+        align-self: center;
+        @include typography.preset-3
     }
 }

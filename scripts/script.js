@@ -323,8 +323,8 @@ function OrderItem({name, amount, price, image}) {
         div({class:"order-item-image"},
             img({src: image, alt:name})
         ),
-        div({class:"order-item-name"}, name),
-        div({class:"order-item-amount"}, `${amount}x`),
+        div({class:"order-item-name"}, b(name)),
+        div({class:"order-item-amount txt-red"}, b(`${amount}x`)),
         div({class:"order-item-price"}, `@ $${price}`),
         div({class:"order-item-subtotal"}, `$${price*amount}`),
     )
