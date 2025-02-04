@@ -134,7 +134,7 @@ function ProductList() {
 function ProductCard(product) {
     return div({ class: "product-card" },
         picture(
-            {class:()=>cartData.items.val.get(product.name)?"active":null},
+            { class: () => cartData.items.val.get(product.name) ? "active" : null },
             source({ media: "(min-width: 800px)", srcset: product.image.desktop }),
             source({ media: "(min-width: 480px)", srcset: product.image.tablet }),
             img({ src: product.image.mobile, alt: product.name }),
@@ -200,24 +200,26 @@ function Cart() {
                     "This is a ", b("carbon-neutral"), " delivery"
                 )
             ),
-            button({ class: "btn", onclick:()=>{
-                document.querySelector("dialog")?.showModal();
-            } }, "Confirm Order"),
+            button({
+                class: "btn", onclick: () => {
+                    document.querySelector("dialog")?.showModal();
+                }
+            }, "Confirm Order"),
         ]
     }
 
     function EmptyCart() {
         return div(
-            {class:"empty-cart-placeholder"},
+            { class: "empty-cart-placeholder" },
             img({
                 width: 128,
                 height: 128,
                 src: "/assets/images/illustration-empty-cart.svg",
                 alt: "Empty Cart Illustration"
             }),
-            div({class:"txt-4"},b("Your added items will appear here"))
+            div({ class: "txt-4" }, b("Your added items will appear here"))
         )
-        
+
     }
 
     return () => {
@@ -279,23 +281,56 @@ function CartItem(name) {
 function OrderDetail() {
     return [
         OrderList(),
-        div("Order Total", ()=>`$${cartData.total}`)
+        div("Order Total", () => ` $${cartData.total.val}`)
     ]
 }
+// @ts-ignore
+van.add(document.querySelector("#order-detail"), OrderDetail())
 
 function OrderList() {
-    const listContainer = div();
-    
-    for (const element of cartData.items.val) {
-        
+    return () => {
+        const listContainer = div();
+
+        for (const [name, amount] of cartData.items.val) {
+            const prod = productListData.products.val.get(name);
+
+            if (!prod) {
+                continue
+            }
+            const {price, image} = prod;
+            van.add(listContainer, OrderItem({
+                name, amount,  price, image: image.thumbnail
+            }))
+
+        }
+
+        return listContainer;
     }
 }
 
-function OrderItem() {
-    
+/**
+ * 
+ * @param {object} p 
+ * @param {string} p.name
+ * @param {number} p.amount
+ * @param {number} p.price
+ * @param {string} p.image
+ * @returns 
+ */
+function OrderItem({name, amount, price, image}) {
+    return div(
+        {class:"order-item"},
+        div({class:"order-item-image"},
+            img({src: image, alt:name})
+        ),
+        div({class:"order-item-name"}, name),
+        div({class:"order-item-amount"}, `${amount}x`),
+        div({class:"order-item-price"}, `@ $${price}`),
+        div({class:"order-item-subtotal"}, `$${price*amount}`),
+    )
 }
 
-document.querySelector("button#reset-order-btn")?.addEventListener("click",()=>{
+document.querySelector("button#reset-order-btn")?.addEventListener("click", () => {
     cartData.items.val = new Map();
     // @ts-ignore
     document.querySelector("dialog#order-confirmed")?.close();

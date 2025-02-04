@@ -152,7 +152,7 @@ dialog#order-confirmed {
         flex-direction: column;
         align-items: stretch;
         gap: 32px;
-        
+
     }
 
 }
@@ -165,4 +165,31 @@ dialog#order-confirmed {
     background-repeat: no-repeat;
     background-position: center;
     margin-bottom: 24px;
+}
+
+.order-item {
+    display: grid;
+    grid-template:
+        "img name name subtotal" auto
+        "img amount price subtotal" auto / 1fr 1fr 1fr 1fr;
+
+    .order-item-image {
+        grid-area: img;
+    }
+
+    .order-item-name {
+        grid-area: name;
+    }
+
+    .order-item-amount {
+        grid-area: amount;
+    }
+
+    .order-item-price {
+        grid-area: price;
+    }
+
+    .order-item-subtotal{
+        grid-area: subtotal;
+    }
 }
