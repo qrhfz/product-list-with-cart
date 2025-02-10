@@ -142,6 +142,8 @@ main {
 }
 
 dialog#order-confirmed {
+    padding: 24px;
+    padding-top: 40px;
     margin: auto;
     border: none;
     border-radius: 12px;
@@ -208,11 +210,13 @@ dialog#order-confirmed {
 
     .order-item-amount {
         grid-area: amount;
+        margin-right: 8px;
         @include typography.preset-4
     }
 
     .order-item-price {
         grid-area: price;
+        color: colors.$rose-900;
     }
 
     .order-item-subtotal {
