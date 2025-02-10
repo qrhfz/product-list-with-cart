@@ -150,6 +150,10 @@ dialog#order-confirmed {
     width: 100%;
     max-width: 592px;
 
+    @include breakpoints.on-tablet{
+        padding: 40px;
+    }
+
     section {
         display: flex;
         flex-direction: column;
