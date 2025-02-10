@@ -281,7 +281,15 @@ function CartItem(name) {
 function OrderDetail() {
     return [
         OrderList(),
-        div("Order Total", () => ` $${cartData.total.val}`)
+        hr({
+            style:"margin-block: 24px;"
+        }),
+        div({class: "order-detail-total"},
+            div("Order Total"),
+            div({class:"order-detail-total-number"}
+                ,() => `$${cartData.total.val}`
+            )
+        ),
     ]
 }
 // @ts-ignore

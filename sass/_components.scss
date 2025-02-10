@@ -168,18 +168,35 @@ dialog#order-confirmed {
     margin-bottom: 24px;
 }
 
+#order-detail {
+    background-color: colors.$rose-50;
+    padding: 24px;
+    border-radius: 8px;
+
+    .order-detail-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .order-detail-total-number {
+            @include typography.preset-2;
+        }
+    }
+}
+
 .order-item {
     display: grid;
     grid-template:
         "img name name subtotal" auto
-        "img amount price subtotal" auto / auto 1fr 1fr auto;
+        "img amount price subtotal" auto / auto auto 1fr auto;
 
     .order-item-image {
         grid-area: img;
 
-        img{
+        img {
             width: 48px;
             height: 48px;
+            margin-right: 16px;
         }
     }
 
@@ -192,14 +209,13 @@ dialog#order-confirmed {
     .order-item-amount {
         grid-area: amount;
         @include typography.preset-4
-
     }
 
     .order-item-price {
         grid-area: price;
     }
 
-    .order-item-subtotal{
+    .order-item-subtotal {
         grid-area: subtotal;
         align-self: center;
         @include typography.preset-3
